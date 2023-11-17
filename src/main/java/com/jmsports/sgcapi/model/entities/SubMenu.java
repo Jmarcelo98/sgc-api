@@ -1,10 +1,9 @@
 package com.jmsports.sgcapi.model.entities;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.Where;
 
@@ -21,14 +20,13 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Where(clause = GenericEntity.ACTIVE)
-public class Menu extends GenericEntity {
+public class SubMenu extends GenericEntity {
 
 	@Column(nullable = false)
 	private String name;
 
-	private Integer sort;
+	@ManyToOne
+	@JoinColumn(name = "id_menu")
+	private Menu menu;
 
-	@OneToMany(mappedBy = "menu")
-	private List<SubMenu> subMenus;
-	
 }
