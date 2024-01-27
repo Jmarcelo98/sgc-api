@@ -7,7 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Getter
@@ -26,8 +31,10 @@ public abstract class GenericEntity {
 
 //	private User userCreated;
 
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dateCreated;
 
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dateUpdate;
 
 	private Boolean isActive;

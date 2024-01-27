@@ -1,0 +1,34 @@
+!SESSION 2024-01-26 21:22:30.203 -----------------------------------------------
+eclipse.buildId=3.9.6.202203281408-ga7
+java.version=1.8.0_392
+java.vendor=Private Build
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=pt_BR
+Framework arguments:  -product com.liferay.ide.studio.ui.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product com.liferay.ide.studio.ui.product
+
+!ENTRY org.eclipse.egit.core 1 0 2024-01-26 21:22:46.091
+!MESSAGE Using Apache MINA sshd as ssh client.
+
+!ENTRY org.eclipse.ui.editors 4 10001 2024-01-26 21:22:48.244
+!MESSAGE Ignoring template 'log' since it has no id.
+
+!ENTRY org.eclipse.ui 4 4 2024-01-26 21:22:48.375
+!MESSAGE Referenced part does not exist yet: fast.
+
+!ENTRY org.eclipse.rse.core 1 0 2024-01-26 21:22:54.961
+!MESSAGE Disconnect operation timed out after 120000 milliseconds.
+
+!ENTRY org.eclipse.core.jobs 4 2 2024-01-26 21:22:55.679
+!MESSAGE An internal error occurred during: "Repository registry initialization".
+!STACK 0
+java.lang.IllegalStateException: Job manager has been shut down.
+	at org.eclipse.core.internal.jobs.JobManager.schedule(JobManager.java:1227)
+	at org.eclipse.core.internal.jobs.InternalJob.schedule(InternalJob.java:385)
+	at org.eclipse.core.runtime.jobs.Job.schedule(Job.java:700)
+	at org.eclipse.m2e.core.internal.index.nexus.NexusIndexManager.scheduleIndexUpdate(NexusIndexManager.java:660)
+	at org.eclipse.m2e.core.internal.index.nexus.NexusIndexManager.setIndexDetails(NexusIndexManager.java:939)
+	at org.eclipse.m2e.core.internal.index.nexus.NexusIndexManager.repositoryAdded(NexusIndexManager.java:878)
+	at org.eclipse.m2e.core.internal.repository.RepositoryRegistry.addRepository(RepositoryRegistry.java:163)
+	at org.eclipse.m2e.core.internal.repository.RepositoryRegistry.updateRegistry(RepositoryRegistry.java:236)
+	at org.eclipse.m2e.core.internal.repository.RepositoryRegistryUpdateJob.run(RepositoryRegistryUpdateJob.java:47)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
