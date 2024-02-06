@@ -1,7 +1,6 @@
 package com.jmsports.sgcapi.model.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 import org.hibernate.annotations.Where;
 
@@ -12,6 +11,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,4 +25,7 @@ public class Team extends GenericEntity {
 	@Column(nullable = false)
 	private String name;
 
+	@ManyToOne
+	@JoinColumn(name = "sport_id")
+	private Sport sport;
 }

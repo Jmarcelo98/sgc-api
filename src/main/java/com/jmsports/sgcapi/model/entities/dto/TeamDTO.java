@@ -15,4 +15,6 @@ public class TeamDTO {
 
 	private Boolean isActive;
 
+	private Integer sportId;
+
 }

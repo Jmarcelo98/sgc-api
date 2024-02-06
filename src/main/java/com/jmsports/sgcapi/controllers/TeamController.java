@@ -5,12 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.jmsports.sgcapi.model.entities.Team;
 import com.jmsports.sgcapi.model.entities.dto.TeamDTO;
@@ -24,17 +19,32 @@ public class TeamController {
 	private TeamService teamService;
 
 	@PostMapping
-	private ResponseEntity<Team> create(@RequestBody TeamDTO teamDTO) {
+	public ResponseEntity<Team> create(@RequestBody TeamDTO teamDTO) {
 		return ResponseEntity.ok().body(teamService.create(teamDTO));
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<Team> update(@PathVariable Integer id, @RequestBody TeamDTO teamDTO) {
+		return ResponseEntity.ok(teamService.update(id, teamDTO));
 	}
 	
 	@GetMapping("/{teamId}")
-	private ResponseEntity<Team> getById(@PathVariable Integer teamId) {
+	public ResponseEntity<Team> getById(@PathVariable Integer teamId) {
 		return ResponseEntity.ok(teamService.getById(teamId));
 	}
 	
 	@GetMapping("/page/{id}")
-	private ResponseEntity<Page<Team>> getAll(@PathVariable Integer id,  Pageable pageable) {
+	public ResponseEntity<Page<Team>> getAll(@PathVariable Integer id,  Pageable pageable) {
 		return ResponseEntity.ok(teamService.getAll(id, pageable));
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Team> delete(@PathVariable Integer id) {
+		return ResponseEntity.ok(teamService.delete(id));
+	}
+
+	@GetMapping
+	public Page<Team> getAll(Pageable pageable){
+		return teamService.getAll(pageable);
 	}
 }
