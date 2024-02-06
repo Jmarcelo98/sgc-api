@@ -1,8 +1,8 @@
 package com.jmsports.sgcapi.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.jmsports.sgcapi.model.entities.Menu;
@@ -17,8 +17,8 @@ public class MenuService {
 	@Autowired
 	private MenuRepository menuRepository;
 
-	public List<Menu> getAllActive(Boolean isActive) {
-		return menuRepository.findAllByIsActive(isActive);
+	public Page<Menu> getAllActive(Boolean isActive, Pageable pageable) {
+		return menuRepository.findAllByIsActiveOrderBySort(isActive, pageable);
 	}
 
 }
