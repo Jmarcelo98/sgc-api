@@ -28,6 +28,11 @@ public class SportController {
 	private ResponseEntity<Sport> create(@RequestBody SportDTO sport) {
 		return ResponseEntity.ok().body(sportService.create(sport));
 	}
+
+	@GetMapping("/{id}")
+	private ResponseEntity<Sport> getById(@PathVariable Integer id) {
+		return ResponseEntity.ok(sportService.getById(id));
+	}
 	
 	@PutMapping("/{id}")
 	private ResponseEntity<Sport> update(@PathVariable Integer id,@RequestBody SportDTO sportDTO) {

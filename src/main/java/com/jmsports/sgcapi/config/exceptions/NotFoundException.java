@@ -1,9 +1,9 @@
 package com.jmsports.sgcapi.config.exceptions;
 
-public class SportNotFoundException extends RuntimeException {
+public class NotFoundException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
-	public SportNotFoundException(String message) {
+	public NotFoundException(String message) {
 		super(message);
 	}
 
