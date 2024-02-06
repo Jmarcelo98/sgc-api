@@ -23,8 +23,5 @@ public class Team extends GenericEntity {
 	
 	@Column(nullable = false)
 	private String name;
-	
-	@JsonIgnore
-	private Boolean isActive;
-	
+
 }

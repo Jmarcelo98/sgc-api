@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.jmsports.sgcapi.model.entities.Team;
 
-@Repository
 public interface TeamRepository extends JpaRepository<Team, Integer> {
 	
 	Page<Team> findAllById(Integer id, Pageable pageable);

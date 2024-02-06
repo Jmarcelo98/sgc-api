@@ -13,4 +13,6 @@ public class TeamDTO {
 	
 	private String name;
 
+	private Boolean isActive;
+
 }

@@ -26,6 +26,7 @@ public class TeamService {
 		team.setDateCreated(LocalDate.now());
 		team.setDateUpdate(LocalDate.now());
 		team.setName(teamDTO.getName());
+		team.setIsActive(teamDTO.getIsActive());
 
 		teamRepository.save(team);
 
