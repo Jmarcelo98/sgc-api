@@ -1,5 +1,6 @@
 package com.jmsports.sgcapi.controllers;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,14 +20,20 @@ import com.jmsports.sgcapi.services.SportService;
 
 @RestController
 @RequestMapping("/sports")
+@AllArgsConstructor
 public class SportController {
 	
-	@Autowired
 	private SportService sportService;
 	
 	@PostMapping
 	private ResponseEntity<Sport> create(@RequestBody SportDTO sport) {
 		return ResponseEntity.ok().body(sportService.create(sport));
+	}
+
+	@GetMapping("/{id}")
+	private ResponseEntity<Sport> getById(@PathVariable Integer id) {
+
+		return ResponseEntity.ok(sportService.getById(id));
 	}
 	
 	@PutMapping("/{id}")

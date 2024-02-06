@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 
 import org.hibernate.annotations.Where;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jmsports.sgcapi.generics.GenericEntity;
 
 import lombok.AllArgsConstructor;
@@ -18,8 +19,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Where(clause = GenericEntity.ACTIVE)
-public class Sport extends GenericEntity {
+public class Team extends GenericEntity {
 	
 	@Column(nullable = false)
-	private String Description;
+	private String name;
+
 }

@@ -9,10 +9,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SportDTO {
+public class TeamDTO {
 	
-	private String Description;
-	
+	private String name;
+
 	private Boolean isActive;
-	
+
 }

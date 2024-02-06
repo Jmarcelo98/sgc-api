@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.jmsports.sgcapi.config.exceptions.BadRequestException;
-import com.jmsports.sgcapi.config.exceptions.SportNotFoundException;
+import com.jmsports.sgcapi.config.exceptions.NotFoundException;
 import com.jmsports.sgcapi.model.entities.Sport;
 import com.jmsports.sgcapi.model.entities.dto.SportDTO;
 import com.jmsports.sgcapi.repositories.SportRepository;
@@ -24,7 +24,7 @@ public class SportService {
 		Sport sport = new Sport();
 		sport.setDateCreated(LocalDate.now());
 		sport.setDateUpdate(LocalDate.now());
-		sport.setIsActive(true);
+		sport.setIsActive(sportDTO.getIsActive());
 		sport.setDescription(sportDTO.getDescription());
 
 		sportRepository.save(sport);
@@ -32,11 +32,16 @@ public class SportService {
 		return sport;
 	}
 
+	public Sport getById(Integer id) {
+		return sportRepository.findById(id)
+				.orElseThrow(() -> new NotFoundException("Erro ao encontrar um Sport com o id: [" + id + "] "));
+	}
+
 	public Sport update(Integer id, SportDTO sportDTO) {
 		Sport sport = new Sport();
 
 		sport = sportRepository.findById(id)
-				.orElseThrow(() -> new SportNotFoundException("Erro ao encontrar um Sport com o id: [" + id + "] "));
+				.orElseThrow(() -> new NotFoundException("Erro ao encontrar um Sport com o id: [" + id + "] "));
 
 		if (!sport.getDescription().toLowerCase().equalsIgnoreCase(sportDTO.getDescription())) {
 			sport.setDescription(sportDTO.getDescription());
