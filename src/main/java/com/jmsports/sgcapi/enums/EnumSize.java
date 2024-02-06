@@ -1,22 +1,20 @@
 package com.jmsports.sgcapi.enums;
 
-public enum EnumSize {
-	
-	P("p"),
-	M("m"),
-	G("g"),
-	GG("gg");
-	
-	private String size;
-	
-	private EnumSize(String size) {
-		this.size = size;
-	}
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-	public String getSize() {
-		return size;
-	}
-	
-	
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+public enum EnumSize {
+
+	P("p", 1),
+	M("m", 2),
+	G("g", 3),
+	GG("gg", 4);
+
+	private String size;
+	private int id;
 
 }
