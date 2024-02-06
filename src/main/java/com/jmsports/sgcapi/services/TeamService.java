@@ -18,8 +18,9 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class TeamService {
 
-	@Autowired
 	private TeamRepository teamRepository;
+	private SportService sportService;
+
 
 	public Team create(TeamDTO teamDTO) {
 		Team team = new Team();
@@ -27,6 +28,7 @@ public class TeamService {
 		team.setDateUpdate(LocalDate.now());
 		team.setName(teamDTO.getName());
 		team.setIsActive(teamDTO.getIsActive());
+		team.setSport(sportService.getById(teamDTO.getSportId()));
 
 		teamRepository.save(team);
 
@@ -36,11 +38,43 @@ public class TeamService {
 	public Team getById(Integer id) {
         return teamRepository.findById(id).orElseThrow(() -> new NotFoundException("Erro ao encontrar um Team com o id: [" + id + "]"));
 	}
+
+	public Team update(Integer id, TeamDTO teamDTO) {
+		Team team = new Team();
+
+		team = teamRepository.findById(id).orElseThrow(() -> new NotFoundException("Erro ao encontrar um Team com o id: [" + id + "]"));
+
+		if (!team.getName().toLowerCase().equalsIgnoreCase(teamDTO.getName())) {
+			team.setName(teamDTO.getName());
+			team.setDateUpdate(LocalDate.now());
+		} else {
+			throw new NotFoundException("JA EXISTE UM TEAM COM ESSE NOME [ " + teamDTO.getName() + "] ");
+		}
+		teamRepository.save(team);
+
+		return team;
+	}
+
+	public Team delete(Integer id) {
+		Team team = teamRepository.findById(id).orElseThrow(() -> new NotFoundException("Erro ao encontrar um Team com o id: [" + id + "]"));
+		teamRepository.delete(team);
+		return team;
+	}
 	
 	public Page<Team> getAll(Integer id, Pageable pageable) {
 		try {
 
 			return teamRepository.findAllById(id, pageable);
+
+		} catch (NotFoundException e) {
+			throw new NotFoundException("Nenhum Conteudo encontrado. " + e);
+		}
+	}
+
+	public Page<Team> getAll(Pageable pageable) {
+		try {
+
+			return teamRepository.findAll(pageable);
 
 		} catch (NotFoundException e) {
 			throw new NotFoundException("Nenhum Conteudo encontrado. " + e);

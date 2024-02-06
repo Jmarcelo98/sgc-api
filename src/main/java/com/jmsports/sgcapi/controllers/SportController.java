@@ -26,23 +26,23 @@ public class SportController {
 	private SportService sportService;
 	
 	@PostMapping
-	private ResponseEntity<Sport> create(@RequestBody SportDTO sport) {
+	public ResponseEntity<Sport> create(@RequestBody SportDTO sport) {
 		return ResponseEntity.ok().body(sportService.create(sport));
 	}
 
 	@GetMapping("/{id}")
-	private ResponseEntity<Sport> getById(@PathVariable Integer id) {
+	public ResponseEntity<Sport> getById(@PathVariable Integer id) {
 
 		return ResponseEntity.ok(sportService.getById(id));
 	}
 	
 	@PutMapping("/{id}")
-	private ResponseEntity<Sport> update(@PathVariable Integer id,@RequestBody SportDTO sportDTO) {
+	public ResponseEntity<Sport> update(@PathVariable Integer id,@RequestBody SportDTO sportDTO) {
 		return ResponseEntity.ok(sportService.update(id, sportDTO));
 	}
 	
 	@DeleteMapping("/{id}")
-	private ResponseEntity<Void> delete(@PathVariable Integer id) {
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		sportService.delete(id);
 		return ResponseEntity.noContent().build();
 	}

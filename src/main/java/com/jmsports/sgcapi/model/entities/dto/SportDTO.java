@@ -14,5 +14,5 @@ public class SportDTO {
 	private String Description;
 	
 	private Boolean isActive;
-	
+
 }
