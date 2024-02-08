@@ -1,18 +1,20 @@
 package com.jmsports.sgcapi.services;
 
-import java.time.LocalDate;
-import java.util.Arrays;
-
+import com.fasterxml.classmate.AnnotationOverrides;
+import com.jmsports.sgcapi.model.dto.PromotionDTO;
+import com.jmsports.sgcapi.model.entities.Menu;
+import com.jmsports.sgcapi.model.entities.Promotion;
 import com.jmsports.sgcapi.model.entities.Sport;
 import com.jmsports.sgcapi.model.entities.SubMenu;
+import com.jmsports.sgcapi.repositories.MenuRepository;
+import com.jmsports.sgcapi.repositories.PromotionRepository;
 import com.jmsports.sgcapi.repositories.SportRepository;
 import com.jmsports.sgcapi.repositories.SubMenuRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import com.jmsports.sgcapi.model.entities.Menu;
-import com.jmsports.sgcapi.repositories.MenuRepository;
-
-import lombok.AllArgsConstructor;
+import java.time.LocalDate;
+import java.util.Arrays;
 
 @Service
 @AllArgsConstructor
@@ -21,6 +23,7 @@ public class DbService {
     private MenuRepository menuRepository;
     private SportRepository sportRepository;
     private SubMenuRepository subMenuRepository;
+    private PromotionRepository promotionRepository;
 
     public void add() {
         var menu = Menu.builder().name("Basquete").sort(0).isActive(true).dateCreated(LocalDate.now()).dateUpdate(null).build();
@@ -42,7 +45,6 @@ public class DbService {
         var subMenu4 = SubMenu.builder().id(null).name("MIBR").menu(menu5).isActive(true).dateCreated(LocalDate.now()).dateUpdate(null).build();
 
         subMenuRepository.saveAll(Arrays.asList(subMenu, subMenu1, subMenu2, subMenu3, subMenu4));
-
     }
 
 }
