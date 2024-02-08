@@ -1,14 +1,13 @@
 package com.jmsports.sgcapi.controllers;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.jmsports.sgcapi.model.entities.Team;
-import com.jmsports.sgcapi.model.entities.dto.TeamDTO;
+import com.jmsports.sgcapi.model.dto.TeamDTO;
 import com.jmsports.sgcapi.services.TeamService;
 
 @RestController

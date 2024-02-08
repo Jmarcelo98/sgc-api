@@ -1,4 +1,4 @@
-package com.jmsports.sgcapi.model.entities.dto;
+package com.jmsports.sgcapi.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

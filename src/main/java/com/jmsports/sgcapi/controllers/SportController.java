@@ -1,7 +1,6 @@
 package com.jmsports.sgcapi.controllers;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jmsports.sgcapi.model.entities.Sport;
-import com.jmsports.sgcapi.model.entities.dto.SportDTO;
+import com.jmsports.sgcapi.model.dto.SportDTO;
 import com.jmsports.sgcapi.services.SportService;
 
 @RestController

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.Where;
 
 import com.jmsports.sgcapi.generics.GenericEntity;
@@ -17,6 +18,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Where(clause = GenericEntity.ACTIVE)
@@ -28,5 +30,6 @@ public class SubMenu extends GenericEntity {
 	@ManyToOne
 	@JoinColumn(name = "id_menu")
 	private Menu menu;
+
 
 }

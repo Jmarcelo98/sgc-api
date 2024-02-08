@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.jmsports.sgcapi.config.exceptions.BadRequestException;
 import com.jmsports.sgcapi.config.exceptions.NotFoundException;
 import com.jmsports.sgcapi.model.entities.Sport;
-import com.jmsports.sgcapi.model.entities.dto.SportDTO;
+import com.jmsports.sgcapi.model.dto.SportDTO;
 import com.jmsports.sgcapi.repositories.SportRepository;
 
 import lombok.AllArgsConstructor;
