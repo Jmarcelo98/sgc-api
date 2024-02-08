@@ -21,11 +21,14 @@ public class MenuController {
 
 	private MenuService menuService;
 
-	@GetMapping("/{active}")
+	@GetMapping("/active/{active}")
 	public Page<MenuDTO> getAllActive(@PathVariable("active") Boolean isActive, Pageable pageable) {
 		return menuService.getAllActive(isActive, pageable);
 	}
 
-
+	@GetMapping("/{id}")
+	public MenuDTO findById(@PathVariable("id") Integer id) {
+		return menuService.findById(id);
+	}
 
 }

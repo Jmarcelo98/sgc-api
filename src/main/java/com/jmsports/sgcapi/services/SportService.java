@@ -2,12 +2,12 @@ package com.jmsports.sgcapi.services;
 
 import java.time.LocalDate;
 
+import com.jmsports.sgcapi.handlers.BusinessException;
+import com.jmsports.sgcapi.handlers.ResourceNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.jmsports.sgcapi.config.exceptions.BadRequestException;
-import com.jmsports.sgcapi.config.exceptions.NotFoundException;
 import com.jmsports.sgcapi.model.entities.Sport;
 import com.jmsports.sgcapi.model.dto.SportDTO;
 import com.jmsports.sgcapi.repositories.SportRepository;
@@ -34,20 +34,20 @@ public class SportService {
 
 	public Sport getById(Integer id) {
 		return sportRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Erro ao encontrar um Sport com o id: [" + id + "] "));
+				.orElseThrow(() -> new ResourceNotFoundException("Erro ao encontrar um Sport com o id: [" + id + "] "));
 	}
 
 	public Sport update(Integer id, SportDTO sportDTO) {
 		Sport sport = new Sport();
 
 		sport = sportRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Erro ao encontrar um Sport com o id: [" + id + "] "));
+				.orElseThrow(() -> new ResourceNotFoundException("Erro ao encontrar um Sport com o id: [" + id + "] "));
 
 		if (!sport.getDescription().toLowerCase().equalsIgnoreCase(sportDTO.getDescription())) {
 			sport.setDescription(sportDTO.getDescription());
 			sport.setDateUpdate(LocalDate.now());
 		} else {
-			throw new BadRequestException("JA EXISTE UM SPORT COM ESSE NOME [ " + sportDTO.getDescription() + "] " );
+			throw new BusinessException("JA EXISTE UM SPORT COM ESSE NOME [ " + sportDTO.getDescription() + "] " );
 		}
 		sportRepository.save(sport);
 
@@ -62,7 +62,7 @@ public class SportService {
 		try {
 			sportRepository.deleteById(id);
 		} catch (Exception e) {
-			throw new BadRequestException("Sport com Id: [" + id + "], não encontrando para deleção. " + e);
+			throw new BusinessException("Sport com Id: [" + id + "], não encontrando para deleção. " + e);
 		}
 	}
 

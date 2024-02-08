@@ -1,24 +1,23 @@
 package com.jmsports.sgcapi.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jmsports.sgcapi.generics.GenericDTO;
+import com.jmsports.sgcapi.model.entities.Menu;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MenuDTO extends GenericDTO {
+public class SubMenuDTO extends GenericDTO {
 
 	private String name;
 
-	private Integer sort;
-
-	private List<SubMenuDTO> subMenus;
+	@JsonIgnore
+	private MenuDTO menu;
 
 }

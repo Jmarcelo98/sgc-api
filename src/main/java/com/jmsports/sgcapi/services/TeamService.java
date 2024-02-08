@@ -2,12 +2,11 @@ package com.jmsports.sgcapi.services;
 
 import java.time.LocalDate;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.jmsports.sgcapi.handlers.ResourceNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.jmsports.sgcapi.config.exceptions.NotFoundException;
 import com.jmsports.sgcapi.model.entities.Team;
 import com.jmsports.sgcapi.model.dto.TeamDTO;
 import com.jmsports.sgcapi.repositories.TeamRepository;
@@ -36,19 +35,19 @@ public class TeamService {
 	}
 	
 	public Team getById(Integer id) {
-        return teamRepository.findById(id).orElseThrow(() -> new NotFoundException("Erro ao encontrar um Team com o id: [" + id + "]"));
+        return teamRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao encontrar um Team com o id: [" + id + "]"));
 	}
 
 	public Team update(Integer id, TeamDTO teamDTO) {
 		Team team = new Team();
 
-		team = teamRepository.findById(id).orElseThrow(() -> new NotFoundException("Erro ao encontrar um Team com o id: [" + id + "]"));
+		team = teamRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao encontrar um Team com o id: [" + id + "]"));
 
 		if (!team.getName().toLowerCase().equalsIgnoreCase(teamDTO.getName())) {
 			team.setName(teamDTO.getName());
 			team.setDateUpdate(LocalDate.now());
 		} else {
-			throw new NotFoundException("JA EXISTE UM TEAM COM ESSE NOME [ " + teamDTO.getName() + "] ");
+			throw new ResourceNotFoundException("JA EXISTE UM TEAM COM ESSE NOME [ " + teamDTO.getName() + "] ");
 		}
 		teamRepository.save(team);
 
@@ -56,7 +55,7 @@ public class TeamService {
 	}
 
 	public Team delete(Integer id) {
-		Team team = teamRepository.findById(id).orElseThrow(() -> new NotFoundException("Erro ao encontrar um Team com o id: [" + id + "]"));
+		Team team = teamRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao encontrar um Team com o id: [" + id + "]"));
 		teamRepository.delete(team);
 		return team;
 	}
@@ -66,8 +65,8 @@ public class TeamService {
 
 			return teamRepository.findAllById(id, pageable);
 
-		} catch (NotFoundException e) {
-			throw new NotFoundException("Nenhum Conteudo encontrado. " + e);
+		} catch (ResourceNotFoundException e) {
+			throw new ResourceNotFoundException("Nenhum Conteudo encontrado. " + e);
 		}
 	}
 
@@ -76,8 +75,8 @@ public class TeamService {
 
 			return teamRepository.findAll(pageable);
 
-		} catch (NotFoundException e) {
-			throw new NotFoundException("Nenhum Conteudo encontrado. " + e);
+		} catch (ResourceNotFoundException e) {
+			throw new ResourceNotFoundException("Nenhum Conteudo encontrado. " + e);
 		}
 	}
 }
