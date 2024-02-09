@@ -1,11 +1,9 @@
 package com.jmsports.sgcapi.generics;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,9 +25,9 @@ public abstract class GenericEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	private LocalDate dateCreated;
+	private LocalDateTime dateCreated;
 
-	private LocalDate dateUpdate;
+	private LocalDateTime dateUpdate;
 
 	private Boolean isActive;
 

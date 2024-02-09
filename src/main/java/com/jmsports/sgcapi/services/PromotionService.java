@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Service
 @AllArgsConstructor
@@ -23,7 +24,7 @@ public class PromotionService {
         LocalDate endDate = LocalDate.now().plusDays(durationPromotion);
 
         promotion.setPercent(promotionDTO.getPercent());
-        promotion.setDateCreated(LocalDate.now());
+        promotion.setDateCreated(LocalDateTime.now());
         promotion.setIsActive(promotionDTO.getIsActive());
 
         if (!promotionDTO.getIsActive()) {
@@ -48,7 +49,7 @@ public class PromotionService {
         LocalDate endDate = LocalDate.now().plusDays(durationPromotion);
 
         promotion.setPercent(promotionDTO.getPercent());
-        promotion.setDateUpdate(LocalDate.now());
+        promotion.setDateUpdate(LocalDateTime.now());
         promotion.setIsActive(promotionDTO.getIsActive());
         if (!promotionDTO.getIsActive()) {
             promotion.setEndDate(null);

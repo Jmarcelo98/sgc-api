@@ -26,6 +26,10 @@ public class MenuService {
 				filterMenuRecord.name() != null ? filterMenuRecord.name().toUpperCase() : null,
 				filterMenuRecord.isActive(), pageable);
 
+		list.forEach(obj -> {
+			obj.setSubMenus(null);
+		});
+
 		return MenuMapper.INSTANCE.pageEntityToPageDTO(list);
 	}
 

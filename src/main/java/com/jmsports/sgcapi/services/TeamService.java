@@ -1,6 +1,7 @@
 package com.jmsports.sgcapi.services;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.jmsports.sgcapi.handlers.ResourceNotFoundException;
 import org.springframework.data.domain.Page;
@@ -23,8 +24,8 @@ public class TeamService {
 
 	public Team create(TeamDTO teamDTO) {
 		Team team = new Team();
-		team.setDateCreated(LocalDate.now());
-		team.setDateUpdate(LocalDate.now());
+		team.setDateCreated(LocalDateTime.now());
+		team.setDateUpdate(LocalDateTime.now());
 		team.setName(teamDTO.getName());
 		team.setIsActive(teamDTO.getIsActive());
 		team.setSport(sportService.getById(teamDTO.getSportId()));
@@ -45,7 +46,7 @@ public class TeamService {
 
 		if (!team.getName().toLowerCase().equalsIgnoreCase(teamDTO.getName())) {
 			team.setName(teamDTO.getName());
-			team.setDateUpdate(LocalDate.now());
+			team.setDateUpdate(LocalDateTime.now());
 		} else {
 			throw new ResourceNotFoundException("JA EXISTE UM TEAM COM ESSE NOME [ " + teamDTO.getName() + "] ");
 		}

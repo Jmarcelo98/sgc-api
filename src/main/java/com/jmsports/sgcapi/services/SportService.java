@@ -1,6 +1,7 @@
 package com.jmsports.sgcapi.services;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.jmsports.sgcapi.handlers.BusinessException;
 import com.jmsports.sgcapi.handlers.ResourceNotFoundException;
@@ -22,8 +23,8 @@ public class SportService {
 
 	public Sport create(SportDTO sportDTO) {
 		Sport sport = new Sport();
-		sport.setDateCreated(LocalDate.now());
-		sport.setDateUpdate(LocalDate.now());
+		sport.setDateCreated(LocalDateTime.now());
+		sport.setDateUpdate(LocalDateTime.now());
 		sport.setIsActive(sportDTO.getIsActive());
 		sport.setDescription(sportDTO.getDescription());
 
@@ -45,7 +46,7 @@ public class SportService {
 
 		if (!sport.getDescription().toLowerCase().equalsIgnoreCase(sportDTO.getDescription())) {
 			sport.setDescription(sportDTO.getDescription());
-			sport.setDateUpdate(LocalDate.now());
+			sport.setDateUpdate(LocalDateTime.now());
 		} else {
 			throw new BusinessException("JA EXISTE UM SPORT COM ESSE NOME [ " + sportDTO.getDescription() + "] " );
 		}
