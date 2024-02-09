@@ -26,30 +26,28 @@ public class MenuService {
 				filterMenuRecord.name() != null ? filterMenuRecord.name().toUpperCase() : null,
 				filterMenuRecord.isActive(), pageable);
 
-		list.forEach(obj -> {
-			obj.setSubMenus(null);
-		});
+		list.forEach(obj -> obj.setSubMenus(null));
 
 		return MenuMapper.INSTANCE.pageEntityToPageDTO(list);
 	}
 
 	public MenuDTO getById(Integer id) {
-		return MenuMapper.INSTANCE.entityToDTO(menuRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Menu não encontrado através do ID: " + id)));
+		return MenuMapper.INSTANCE.entityToDTO(findById(id));
 	}
 
 	public void update(MenuDTO menuDTO) {
 
-		var menu = findById(menuDTO.getId());
+//		var menu = findById(menuDTO.getId());
 
 		if (existsByName(menuDTO.getName())) {
 			throw new BusinessException("Nome do Menu já existe");
 		}
 
-		menu.setName(menuDTO.getName());
-		menu.setDateUpdate(menuDTO.getDateUpdate());
-		menu.setIsActive(menuDTO.getIsActive());
+//		menu.setName(menuDTO.getName());
+//		menu.setDateUpdate(menuDTO.getDateUpdate());
+//		menu.setIsActive(menuDTO.getIsActive());
 
-		menuRepository.save(menu);
+//		menuRepository.save(menu);
 
 	}
 

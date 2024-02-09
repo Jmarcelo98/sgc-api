@@ -12,7 +12,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/menu")
+@RequestMapping("/menus")
 @CrossOrigin("*")
 public class MenuController {
 
@@ -24,7 +24,8 @@ public class MenuController {
 	}
 
 	@GetMapping("/{id}")
-	public MenuDTO findById(@PathVariable("id") Integer id) {
+	public MenuDTO getById(@PathVariable("id") Integer id) {
+		System.err.println(id);
 		return menuService.getById(id);
 	}
 

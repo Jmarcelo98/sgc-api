@@ -1,6 +1,5 @@
 package com.jmsports.sgcapi.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.jmsports.sgcapi.generics.GenericDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

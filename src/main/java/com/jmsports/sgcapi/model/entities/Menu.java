@@ -6,17 +6,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
-import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.Where;
 
 import com.jmsports.sgcapi.generics.GenericEntity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
 @Entity
 @Getter
 @Setter
-//@Builder
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,7 +31,6 @@ public class Menu extends GenericEntity {
 	private Integer sort;
 
 	@OneToMany(mappedBy = "menu")
-	@JsonIgnore
 	private List<SubMenu> subMenus;
 
 }

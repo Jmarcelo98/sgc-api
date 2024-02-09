@@ -1,16 +1,15 @@
 package com.jmsports.sgcapi.services;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import com.jmsports.sgcapi.handlers.BusinessException;
-import com.jmsports.sgcapi.handlers.ResourceNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.jmsports.sgcapi.model.entities.Sport;
+import com.jmsports.sgcapi.handlers.BusinessException;
+import com.jmsports.sgcapi.handlers.ResourceNotFoundException;
 import com.jmsports.sgcapi.model.dto.SportDTO;
+import com.jmsports.sgcapi.model.entities.Sport;
 import com.jmsports.sgcapi.repositories.SportRepository;
 
 import lombok.AllArgsConstructor;

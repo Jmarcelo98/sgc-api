@@ -1,21 +1,19 @@
 package com.jmsports.sgcapi.services;
 
-import com.fasterxml.classmate.AnnotationOverrides;
-import com.jmsports.sgcapi.model.dto.PromotionDTO;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+
+import org.springframework.stereotype.Service;
+
 import com.jmsports.sgcapi.model.entities.Menu;
-import com.jmsports.sgcapi.model.entities.Promotion;
 import com.jmsports.sgcapi.model.entities.Sport;
 import com.jmsports.sgcapi.model.entities.SubMenu;
 import com.jmsports.sgcapi.repositories.MenuRepository;
 import com.jmsports.sgcapi.repositories.PromotionRepository;
 import com.jmsports.sgcapi.repositories.SportRepository;
 import com.jmsports.sgcapi.repositories.SubMenuRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Arrays;
+import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
