@@ -19,4 +19,6 @@ public interface MenuRepository extends JpaRepository<Menu, Integer> {
 
     Page<Menu> findAllByIsActiveOrderBySort(Boolean isActive, Pageable page);
 
+    Boolean existsByNameIgnoreCase(String name);
+
 }

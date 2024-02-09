@@ -25,9 +25,14 @@ public class MenuController {
 
 	@GetMapping("/{id}")
 	public MenuDTO findById(@PathVariable("id") Integer id) {
-		return menuService.findById(id);
+		return menuService.getById(id);
 	}
 
+
+	@PatchMapping
+	public void update(@RequestBody MenuDTO menuDTO) {
+		menuService.update(menuDTO);
+	}
 
 
 }
