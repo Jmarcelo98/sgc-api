@@ -37,17 +37,17 @@ public class MenuService {
 
 	public void update(MenuDTO menuDTO) {
 
-//		var menu = findById(menuDTO.getId());
+		var menu = findById(menuDTO.getId());
 
 		if (existsByName(menuDTO.getName())) {
 			throw new BusinessException("Nome do Menu já existe");
 		}
 
-//		menu.setName(menuDTO.getName());
-//		menu.setDateUpdate(menuDTO.getDateUpdate());
-//		menu.setIsActive(menuDTO.getIsActive());
+		menu.setName(menuDTO.getName());
+		menu.setDateUpdate(menuDTO.getDateUpdate());
+		menu.setIsActive(menuDTO.getIsActive());
 
-//		menuRepository.save(menu);
+		menuRepository.save(menu);
 
 	}
 
