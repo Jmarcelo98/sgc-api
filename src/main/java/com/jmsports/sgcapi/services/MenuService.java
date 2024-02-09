@@ -3,6 +3,7 @@ package com.jmsports.sgcapi.services;
 import com.jmsports.sgcapi.handlers.ResourceNotFoundException;
 import com.jmsports.sgcapi.mappers.MenuMapper;
 import com.jmsports.sgcapi.model.dto.MenuDTO;
+import com.jmsports.sgcapi.model.record.FilterMenuRecord;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -17,12 +18,11 @@ public class MenuService {
 
 	private MenuRepository menuRepository;
 
-	public Page<MenuDTO> getAllActive(Boolean isActive, Pageable pageable) {
-		var list = menuRepository.findAllByIsActiveOrderBySort(isActive, pageable);
+	public Page<MenuDTO> getAllByFilter(FilterMenuRecord filterMenuRecord, Pageable pageable) {
 
-		list.forEach(obj -> {
-			obj.setSubMenus(null);
-		});
+		var list = menuRepository.getAllFilter(
+				filterMenuRecord.name() != null ? filterMenuRecord.name().toUpperCase() : null,
+				filterMenuRecord.isActive(), pageable);
 
 		return MenuMapper.INSTANCE.pageEntityToPageDTO(list);
 	}

@@ -1,13 +1,10 @@
 package com.jmsports.sgcapi.controllers;
 
 import com.jmsports.sgcapi.model.dto.MenuDTO;
+import com.jmsports.sgcapi.model.record.FilterMenuRecord;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import com.jmsports.sgcapi.services.MenuService;
 
@@ -21,14 +18,16 @@ public class MenuController {
 
 	private MenuService menuService;
 
-	@GetMapping("/active/{active}")
-	public Page<MenuDTO> getAllActive(@PathVariable("active") Boolean isActive, Pageable pageable) {
-		return menuService.getAllActive(isActive, pageable);
+	@PostMapping("/filter")
+	public Page<MenuDTO> getAllByFilter(@RequestBody FilterMenuRecord filterMenuRecord, Pageable pageable) {
+		return menuService.getAllByFilter(filterMenuRecord, pageable);
 	}
 
 	@GetMapping("/{id}")
 	public MenuDTO findById(@PathVariable("id") Integer id) {
 		return menuService.findById(id);
 	}
+
+
 
 }
