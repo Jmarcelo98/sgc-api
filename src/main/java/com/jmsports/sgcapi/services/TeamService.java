@@ -35,13 +35,12 @@ public class TeamService {
 	}
 	
 	public Team getById(Integer id) {
-        return teamRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao encontrar um Team com o id: [" + id + "]"));
+		var team = findById(id);
+        return team;
 	}
 
 	public Team update(Integer id, TeamDTO teamDTO) {
-		Team team = new Team();
-
-		team = teamRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao encontrar um Team com o id: [" + id + "]"));
+		Team team = findById(id);
 
 		if (!team.getName().toLowerCase().equalsIgnoreCase(teamDTO.getName())) {
 			team.setName(teamDTO.getName());
@@ -55,7 +54,7 @@ public class TeamService {
 	}
 
 	public Team delete(Integer id) {
-		Team team = teamRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao encontrar um Team com o id: [" + id + "]"));
+		Team team = findById(id);
 		teamRepository.delete(team);
 		return team;
 	}
@@ -78,5 +77,9 @@ public class TeamService {
 		} catch (ResourceNotFoundException e) {
 			throw new ResourceNotFoundException("Nenhum Conteudo encontrado. " + e);
 		}
+	}
+
+	private Team findById(Integer id) {
+		return teamRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao encontrar um Team com o id: [" + id + "] "));
 	}
 }

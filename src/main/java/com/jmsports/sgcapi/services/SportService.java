@@ -33,15 +33,12 @@ public class SportService {
 	}
 
 	public Sport getById(Integer id) {
-		return sportRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Erro ao encontrar um Sport com o id: [" + id + "] "));
+		Sport sport = findById(id);
+		return sport;
 	}
 
 	public Sport update(Integer id, SportDTO sportDTO) {
-		Sport sport = new Sport();
-
-		sport = sportRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Erro ao encontrar um Sport com o id: [" + id + "] "));
+		Sport sport = findById(id);
 
 		if (!sport.getDescription().toLowerCase().equalsIgnoreCase(sportDTO.getDescription())) {
 			sport.setDescription(sportDTO.getDescription());
@@ -64,6 +61,10 @@ public class SportService {
 		} catch (Exception e) {
 			throw new BusinessException("Sport com Id: [" + id + "], não encontrando para deleção. " + e);
 		}
+	}
+
+	private Sport findById(Integer id) {
+		return sportRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao encontrar um Sport com o id: [" + id + "] "));
 	}
 
 }
