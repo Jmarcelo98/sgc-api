@@ -3,18 +3,19 @@ package com.jmsports.sgcapi.enums;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
 public enum EnumSize {
 
-	P("p", 1),
-	M("m", 2),
-	G("g", 3),
-	GG("gg", 4);
+	p( 1),
+	m( 2),
+	g( 3),
+	gg(4);
 
-	private String size;
-	private int id;
+	private Integer id;
 
+	EnumSize(Integer id) {
+		this.id = id;
+	}
 }
