@@ -37,13 +37,12 @@ public class PromotionService {
     }
 
     public Promotion getById(Integer id) {
-        return promotionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao encontrar uma Promotion com o id: [" + id + "] "));
+        Promotion promotion = findById(id);
+        return promotion;
+
     }
-
     public Promotion update(Integer id, PromotionDTO promotionDTO) {
-        Promotion promotion;
-
-        promotion = promotionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao encontrar uma Promotion com o id: [" + id + "] "));
+        Promotion promotion = findById(id);
 
         int durationPromotion = promotionDTO.getDurationPromotion();
         LocalDate endDate = LocalDate.now().plusDays(durationPromotion);
@@ -60,7 +59,7 @@ public class PromotionService {
     }
 
     public Promotion delete(Integer id) {
-        Promotion promotion = promotionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao encontrar uma Promotion com o id: [" + id + "] "));
+        Promotion promotion = findById(id);
         promotionRepository.delete(promotion);
         return promotion;
     }
@@ -71,6 +70,10 @@ public class PromotionService {
 
     public Page<Promotion> getAllActive(Boolean isActive, Pageable pageable) {
         return promotionRepository.findAllByIsActive(isActive, pageable);
+    }
+
+    private Promotion findById(Integer id) {
+        return promotionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao encontrar uma Promotion com o id: [" + id + "] "));
     }
 
 }
