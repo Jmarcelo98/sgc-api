@@ -1,19 +1,16 @@
 package com.jmsports.sgcapi.model.entities;
 
-import java.time.LocalDate;
-import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jmsports.sgcapi.generics.GenericEntity;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Getter
@@ -21,13 +18,17 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Promotion extends GenericEntity {
+public class Shirt extends GenericEntity {
 
-    private Double percent;
-    private LocalDate endDate;
+    private String description;
+    private Double price;
 
-    @OneToMany(mappedBy = "promotion")
+    @ManyToOne
+    @JoinColumn(name = "promotion_id")
+    private Promotion promotion;
+    private Boolean hasPromotion;
+
+
     @JsonIgnore
-    private List<Shirt> shirts;
-
+    private Boolean isActive;
 }
