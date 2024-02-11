@@ -3,7 +3,6 @@ package com.jmsports.sgcapi.services;
 import com.jmsports.sgcapi.handlers.ResourceNotFoundException;
 import com.jmsports.sgcapi.model.dto.ShirtDTO;
 import com.jmsports.sgcapi.model.entities.Shirt;
-import com.jmsports.sgcapi.model.entities.Team;
 import com.jmsports.sgcapi.repositories.ShirtRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;

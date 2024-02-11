@@ -3,13 +3,9 @@ package com.jmsports.sgcapi.services;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
-import com.jmsports.sgcapi.model.entities.Team;
+import com.jmsports.sgcapi.model.entities.*;
 import com.jmsports.sgcapi.repositories.*;
 import org.springframework.stereotype.Service;
-
-import com.jmsports.sgcapi.model.entities.Menu;
-import com.jmsports.sgcapi.model.entities.Sport;
-import com.jmsports.sgcapi.model.entities.SubMenu;
 
 import lombok.AllArgsConstructor;
 
@@ -21,6 +17,7 @@ public class DbService {
     private SportRepository sportRepository;
     private SubMenuRepository subMenuRepository;
     private TeamRepository teamRepository;
+    private ShirtRepository shirtRepository;
 
     public void add() {
         var menu = Menu.builder().name("Basquete").sort(0).isActive(true).dateCreated(LocalDateTime.now()).dateUpdate(null).build();
@@ -45,6 +42,9 @@ public class DbService {
 
         var team = Team.builder().name("Sao Paulo").sport(sport).isActive(true).dateCreated(LocalDateTime.now()).dateUpdate(null).build();
         teamRepository.save(team);
+
+        var shirt = Shirt.builder().description("Camisa do São Paulo").price(50.5).hasPromotion(false).team(team).dateCreated(LocalDateTime.now()).dateUpdate(null).build();
+        shirtRepository.save(shirt);
     }
 
 }

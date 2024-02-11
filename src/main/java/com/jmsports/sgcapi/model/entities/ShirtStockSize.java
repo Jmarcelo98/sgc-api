@@ -10,6 +10,8 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 @Entity
@@ -32,5 +34,9 @@ public class ShirtStockSize extends GenericEntity {
 
     @JsonIgnore
     private LocalDateTime dateUpdate;
+
+    @ManyToOne
+    @JoinColumn(name = "shirt_id")
+    private Shirt shirt;
 
 }

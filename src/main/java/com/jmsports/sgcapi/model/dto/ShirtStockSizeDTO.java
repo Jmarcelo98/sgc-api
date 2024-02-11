@@ -13,7 +13,8 @@ import lombok.Setter;
 public class ShirtStockSizeDTO {
 
     private Integer stock;
-
     private EnumSize enumId;
+    private Integer shirtId;
+
 
 }

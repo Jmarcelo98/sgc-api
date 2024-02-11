@@ -11,6 +11,8 @@ import lombok.experimental.SuperBuilder;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 @Getter
@@ -31,6 +33,10 @@ public class Shirt extends GenericEntity {
     @ManyToOne
     @JoinColumn(name = "team_id")
     private Team team;
+
+    @OneToMany(mappedBy = "shirt")
+    @JsonIgnore
+    private List<ShirtStockSize> stockSizes;
 
 
     @JsonIgnore

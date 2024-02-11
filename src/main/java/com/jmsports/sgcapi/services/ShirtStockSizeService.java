@@ -12,11 +12,13 @@ import org.springframework.stereotype.Service;
 public class ShirtStockSizeService {
 
     private final ShirtStockSizeRepository shirtStockSizeRepository;
+    private final ShirtService shirtService;
 
     public ShirtStockSize createShirtStockSize(ShirtStockSizeDTO shirtStockSizeDTO) {
         ShirtStockSize shirtStockSize = new ShirtStockSize();
         EnumSize enumSize = shirtStockSizeDTO.getEnumId();
         shirtStockSize.setStock(shirtStockSizeDTO.getStock());
+        shirtStockSize.setShirt(shirtService.getById(shirtStockSizeDTO.getShirtId()));
 
         if (enumSize != null) {
             shirtStockSize.setEnumId(enumSize.getId());
