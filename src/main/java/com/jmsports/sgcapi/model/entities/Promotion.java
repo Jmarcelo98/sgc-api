@@ -1,9 +1,12 @@
 package com.jmsports.sgcapi.model.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jmsports.sgcapi.generics.GenericEntity;
 
 import lombok.AllArgsConstructor;
@@ -21,7 +24,10 @@ import lombok.experimental.SuperBuilder;
 public class Promotion extends GenericEntity {
 
     private Double percent;
-
     private LocalDate endDate;
+
+    @OneToMany(mappedBy = "promotion")
+    @JsonIgnore
+    private List<Shirt> shirts;
 
 }

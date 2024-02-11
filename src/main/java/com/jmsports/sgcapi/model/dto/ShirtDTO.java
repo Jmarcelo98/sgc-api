@@ -1,6 +1,5 @@
 package com.jmsports.sgcapi.model.dto;
 
-import com.jmsports.sgcapi.enums.EnumSize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,11 +9,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ShirtStockSizeDTO {
+public class ShirtDTO {
 
-    private Integer stock;
-    private EnumSize enumId;
-    private Integer shirtId;
-
-
+    private String description;
+    private Double price;
+    private Boolean hasPromotion;
+    private Integer promotionId;
+    private Integer teamId;
 }

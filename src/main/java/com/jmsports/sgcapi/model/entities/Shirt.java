@@ -1,7 +1,6 @@
 package com.jmsports.sgcapi.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.jmsports.sgcapi.enums.EnumSize;
 import com.jmsports.sgcapi.generics.GenericEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +11,8 @@ import lombok.experimental.SuperBuilder;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import java.time.LocalDateTime;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,23 +20,25 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ShirtStockSize extends GenericEntity {
+public class Shirt extends GenericEntity {
 
-    private Integer stock;
+    private String description;
+    private Double price;
+    private Boolean hasPromotion;
 
-    private Integer enumId;
+    @ManyToOne
+    @JoinColumn(name = "promotion_id")
+    private Promotion promotion;
+
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    private Team team;
+
+    @OneToMany(mappedBy = "shirt")
+    @JsonIgnore
+    private List<ShirtStockSize> stockSizes;
+
 
     @JsonIgnore
     private Boolean isActive;
-
-    @JsonIgnore
-    private LocalDateTime dateCreated;
-
-    @JsonIgnore
-    private LocalDateTime dateUpdate;
-
-    @ManyToOne
-    @JoinColumn(name = "shirt_id")
-    private Shirt shirt;
-
 }
