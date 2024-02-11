@@ -15,4 +15,5 @@ public class ShirtDTO {
     private Double price;
     private Boolean hasPromotion;
     private Integer promotionId;
+    private Integer teamId;
 }

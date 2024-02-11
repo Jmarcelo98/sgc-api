@@ -22,11 +22,15 @@ public class Shirt extends GenericEntity {
 
     private String description;
     private Double price;
+    private Boolean hasPromotion;
 
     @ManyToOne
     @JoinColumn(name = "promotion_id")
     private Promotion promotion;
-    private Boolean hasPromotion;
+
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    private Team team;
 
 
     @JsonIgnore

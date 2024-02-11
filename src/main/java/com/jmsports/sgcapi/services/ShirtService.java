@@ -3,6 +3,7 @@ package com.jmsports.sgcapi.services;
 import com.jmsports.sgcapi.handlers.ResourceNotFoundException;
 import com.jmsports.sgcapi.model.dto.ShirtDTO;
 import com.jmsports.sgcapi.model.entities.Shirt;
+import com.jmsports.sgcapi.model.entities.Team;
 import com.jmsports.sgcapi.repositories.ShirtRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,7 @@ public class ShirtService {
 
     private final ShirtRepository shirtRepository;
     private final PromotionService promotionService;
+    private final TeamService teamService;
 
     public Shirt create(ShirtDTO shirtDTO) {
 
@@ -26,6 +28,7 @@ public class ShirtService {
         shirt.setDateCreated(LocalDateTime.now());
         shirt.setDateUpdate(null);
         shirt.setHasPromotion(hasPromotion);
+        shirt.setTeam(teamService.getById(shirtDTO.getTeamId()));
 
         ifHasPromotionIsTrueApplyPromotion(shirtDTO, hasPromotion, shirt);
 
@@ -42,6 +45,7 @@ public class ShirtService {
         Boolean hasPromotion = shirtDTO.getHasPromotion();
         shirt.setDescription(shirtDTO.getDescription());
         shirt.setDateUpdate(LocalDateTime.now());
+        shirt.setTeam(teamService.getById(shirtDTO.getTeamId()));
 
         ifHasPromotionIsTrueApplyPromotion(shirtDTO, hasPromotion, shirt);
 
