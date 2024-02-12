@@ -11,10 +11,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,17 +25,15 @@ import java.util.List;
 @Table(name = "users")
 public class User extends GenericEntity implements UserDetails {
 
+    @NotNull
     private String name;
+
+    @NotNull
+    @Column(unique = true)
     private String cpf;
+
+    @NotNull
     private String password;
-
-    @OneToOne(mappedBy = "user")
-    @JsonIgnore
-    private Login login;
-
-    @ManyToMany
-    private List<Role> roles;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -29,11 +29,12 @@ public class UserService {
     }
 
     public User create(UserDTO userDTO) {
-        User user = new User();
-
-        if (existsByLogin(userDTO.getName()) != null) {
+        if (existsByName(userDTO.getName()) != null) {
             throw new BusinessException("Usuário já cadastrado com o nome: [" + userDTO.getName() + "] ");
         }
+
+        User user = new User();
+
 
         user.setName(userDTO.getName());
         user.setCpf(userDTO.getCpf());
@@ -51,7 +52,7 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao encontrar um Usuário com o id: [" + id + "] "));
     }
 
-    private Boolean existsByLogin(String login) {
-        return userRepository.existsByNameIgnoreCase(login);
+    private Boolean existsByName(String name) {
+        return userRepository.existsByNameIgnoreCase(name);
     }
 }

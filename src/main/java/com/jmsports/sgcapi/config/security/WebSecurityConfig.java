@@ -33,7 +33,7 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-      return http.csrf( csrf -> csrf.disable())
+      return http.csrf( csrf -> csrf.disable()).headers(head -> head.frameOptions().sameOrigin())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeRequests(request -> request
                         .antMatchers(HttpMethod.POST, ACESSO_POST).permitAll()
