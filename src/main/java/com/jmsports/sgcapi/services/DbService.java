@@ -18,7 +18,9 @@ public class DbService {
     private SubMenuRepository subMenuRepository;
     private TeamRepository teamRepository;
     private ShirtRepository shirtRepository;
-
+    private RoleRepository roleRepository;
+    private UserRepository userRepository;
+    private LoginRepository loginRepository;
     public void add() {
         var menu = Menu.builder().name("Basquete").sort(0).isActive(true).dateCreated(LocalDateTime.now()).dateUpdate(null).build();
         var menu1 = Menu.builder().name("Futebol").sort(1).isActive(true).dateCreated(LocalDateTime.now()).dateUpdate(null).build();
@@ -45,6 +47,19 @@ public class DbService {
 
         var shirt = Shirt.builder().description("Camisa do São Paulo").price(50.5).hasPromotion(false).team(team).dateCreated(LocalDateTime.now()).dateUpdate(null).build();
         shirtRepository.save(shirt);
+
+        var role = Role.builder().name("ADMIN").build();
+        var role2 = Role.builder().name("USER").build();
+        roleRepository.save(role);
+
+        var user = User.builder().name("Marcos").cpf("12345678901").password("123431221").dateCreated(LocalDateTime.now()).isActive(true).build();
+        userRepository.save(user);
+
+        var login = Login.builder().email("marcos@gmail.com").password("123").build();
+        loginRepository.save(login);
+
+
+
     }
 
 }
