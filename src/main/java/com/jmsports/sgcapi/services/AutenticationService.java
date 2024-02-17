@@ -15,7 +15,7 @@ public class AutenticationService implements UserDetailsService {
 
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByNameIgnoreCase(username).orElseThrow(() -> new UsernameNotFoundException("Erro ao encontrar um Usuário com o login: [" + username + "] "));
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return userRepository.findByEmailIgnoreCase(email).orElseThrow(() -> new UsernameNotFoundException("Erro ao encontrar um Usuário com o login: [" + email + "] "));
     }
 }

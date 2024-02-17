@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
-    User findByName(String name);
-    Optional<User> findByNameIgnoreCase(String login);
-    Boolean existsByNameIgnoreCase(String login);
+    Boolean existsByEmailIgnoreCase(String email);
+    Optional<User> findByEmailIgnoreCase(String login);
+
 }

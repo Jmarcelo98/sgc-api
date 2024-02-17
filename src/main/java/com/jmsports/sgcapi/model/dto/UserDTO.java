@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -13,9 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class UserDTO {
 
-    private String name;
-    private String cpf;
+    private String email;
     private Boolean isActive;
-    private String password;
 
 }

@@ -28,8 +28,17 @@ public class WebSecurityConfig {
             "/configuration/security", "/swagger-ui.html", "/swagger-ui.html**", "/webjars/**", "/h2/**",
             "/h2-console/**" };
 
-    private final String[] ACESSO_POST = { "/login", "/users" };
-    private final String[] ACESSO_GET = { "/users/{id}" };
+    private final String[] ACESSO_POST = { "/login", "/users", "/promotions", "/shirts", "/teams", "/sports",
+            "/sizes"};
+    private final String[] ACESSO_GET = { "/users/**", "/promotions/**", "/shirts/**", "/teams/**",
+            "/sports/**", "/sizes/**"};
+
+    private final String[] ACESSO_PUT = { "/users/**", "/promotions/**", "/shirts/**", "/teams/**",
+            "/sports/**", "/sizes/**"};
+
+    private final String[] ACESSO_DELETE = { "/users/**", "/promotions/**", "/shirts/**", "/teams/**",
+            "/sports/**", "/sizes/**"};
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -38,6 +47,8 @@ public class WebSecurityConfig {
                 .authorizeRequests(request -> request
                         .antMatchers(HttpMethod.POST, ACESSO_POST).permitAll()
                         .antMatchers(HttpMethod.GET, ACESSO_GET).permitAll()
+                        .antMatchers(HttpMethod.PUT, ACESSO_PUT).permitAll()
+                        .antMatchers(HttpMethod.DELETE, ACESSO_DELETE).permitAll()
                         .antMatchers(ACESSO).permitAll()
                         .anyRequest()
                         .authenticated())

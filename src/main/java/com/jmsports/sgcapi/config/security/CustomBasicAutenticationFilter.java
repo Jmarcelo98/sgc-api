@@ -34,7 +34,7 @@ public class CustomBasicAutenticationFilter extends OncePerRequestFilter {
         if (authorizationHeader != null) {
             token = authorizationHeader.replace("Bearer ", "");
             var subject  = tokenService.getSubject(token);
-            var user = userRepository.findByName(subject);
+            var user = userRepository.findByEmailIgnoreCase(subject);
 
             var authentication = new UsernamePasswordAuthenticationToken(user, null, null);
 
@@ -43,35 +43,4 @@ public class CustomBasicAutenticationFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
-    
-//    @Override
-//    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-//
-//        if (isBasicAuthentication(request)) {
-//            String[] credentials = decodeBase64(getHeader(request).replace(BASIC, ""))
-//                    .split(":");
-//            String username = credentials[0];
-//            String password = credentials[1];
-//
-//            User user = userRepository.findByName(username);
-//
-//            if (user == null ){
-//                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//                response.getWriter().write("Usuário não encontrado");
-//                return;
-//            }
-//
-//            boolean valid = checkPassword(user.getPassword(), password);
-//
-//            if (!valid) {
-//                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//                response.getWriter().write("Senha inválida");
-//            }
-//
-//            setAuthentication(user);
-//        }
-//
-//        filterChain.doFilter(request, response);
-//    }
-
 }

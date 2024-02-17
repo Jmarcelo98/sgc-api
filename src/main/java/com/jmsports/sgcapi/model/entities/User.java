@@ -25,12 +25,8 @@ import java.util.List;
 @Table(name = "users")
 public class User extends GenericEntity implements UserDetails {
 
-    @NotNull
-    private String name;
-
-    @NotNull
     @Column(unique = true)
-    private String cpf;
+    private String email;
 
     @NotNull
     private String password;
@@ -42,7 +38,7 @@ public class User extends GenericEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return name;
+        return email;
     }
 
     @Override

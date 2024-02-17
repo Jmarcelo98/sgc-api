@@ -25,6 +25,8 @@ public class Promotion extends GenericEntity {
 
     private Double percent;
     private LocalDate endDate;
+    @JsonIgnore
+    private int durationPromotion;
 
     @OneToMany(mappedBy = "promotion")
     @JsonIgnore

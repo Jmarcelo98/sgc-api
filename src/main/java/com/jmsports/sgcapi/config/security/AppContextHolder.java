@@ -16,10 +16,7 @@ public class AppContextHolder {
     private final UserService userService;
 
     public User getUser() {
-        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
-            return null;
-        }
         Optional<User> login = (Optional<User>) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return userService.getUserLogged(login.get().getName());
+        return userService.getUserLogged(login.get().getEmail());
     }
 }

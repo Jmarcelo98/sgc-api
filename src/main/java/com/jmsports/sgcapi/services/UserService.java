@@ -2,17 +2,19 @@ package com.jmsports.sgcapi.services;
 
 import com.jmsports.sgcapi.handlers.BusinessException;
 import com.jmsports.sgcapi.handlers.ResourceNotFoundException;
+import com.jmsports.sgcapi.mappers.UserMapper;
 import com.jmsports.sgcapi.model.dto.UserDTO;
 import com.jmsports.sgcapi.model.entities.User;
+import com.jmsports.sgcapi.model.record.LoginRecord;
 import com.jmsports.sgcapi.repositories.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -25,34 +27,38 @@ public class UserService {
 
 
     public User getUserLogged(String login) {
-        return userRepository.findByNameIgnoreCase(login).orElseThrow(() -> new ResourceNotFoundException("Erro ao encontrar um Usuário com o login: [" + login + "] "));
+        return userRepository.findByEmailIgnoreCase(login).orElseThrow(() -> new ResourceNotFoundException("Erro ao encontrar um Usuário com o login: [" + login + "] "));
     }
 
-    public User create(UserDTO userDTO) {
-        if (existsByName(userDTO.getName()) != null) {
-            throw new BusinessException("Usuário já cadastrado com o nome: [" + userDTO.getName() + "] ");
+    public UserDTO create(LoginRecord loginRecord) {
+        var user = new User();
+
+        if (existsByEmail(loginRecord.email())) {
+            throw new BusinessException("Usuário já cadastrado com o email: [" + loginRecord.email() + "] ");
         }
 
-        User user = new User();
-
-
-        user.setName(userDTO.getName());
-        user.setCpf(userDTO.getCpf());
-        user.setPassword(passwordEncoder().encode(userDTO.getPassword()));
-        user.setIsActive(userDTO.getIsActive());
+        user.setPassword(passwordEncoder().encode(loginRecord.password()));
+        user.setEmail(loginRecord.email());
         user.setDateCreated(LocalDateTime.now());
-        return userRepository.save(user);
+        user.setIsActive(true);
+        userRepository.save(user);
+
+        return UserMapper.INSTANCE.entityToDTO(user);
     }
 
-    public User getById(Integer id) {
-        return findById(id);
+    public Page<UserDTO> getAll(Pageable pageable) {
+        return UserMapper.INSTANCE.pageEntityToPageDTO(userRepository.findAll(pageable));
+    }
+
+    public UserDTO getById(Integer id) {
+        return UserMapper.INSTANCE.entityToDTO(findById(id));
     }
 
     public User findById(Integer id) {
         return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao encontrar um Usuário com o id: [" + id + "] "));
     }
 
-    private Boolean existsByName(String name) {
-        return userRepository.existsByNameIgnoreCase(name);
+    private Boolean existsByEmail(String email) {
+        return userRepository.existsByEmailIgnoreCase(email);
     }
 }

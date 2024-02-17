@@ -53,9 +53,10 @@ public class DbService {
         shirtRepository.save(shirt);
 
 
-        String password = passwordEncoder().encode("123431221");
-        var user = User.builder().name("Marcos").cpf("12345678901"). password(password).dateCreated(LocalDateTime.now()).isActive(true).build();
-        userRepository.save(user);
+        String password = passwordEncoder().encode("1234");
+        var user = User.builder().password(password).email("marcos@gmail.com").dateCreated(LocalDateTime.now()).isActive(true).build();
+        var user2 = User.builder().password(password).email("rebeka@gmail.com").dateCreated(LocalDateTime.now()).isActive(true).build();
+        userRepository.saveAll(Arrays.asList(user, user2));
 
     }
 

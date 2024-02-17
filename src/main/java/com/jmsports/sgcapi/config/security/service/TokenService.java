@@ -12,7 +12,7 @@ import java.time.ZoneOffset;
 public class TokenService {
 
     public String generateToken(User user) {
-        return JWT.create().withSubject(user.getName()).withClaim("id", user.getId())
+        return JWT.create().withSubject(user.getEmail()).withClaim("id", user.getId())
                 .withExpiresAt(LocalDateTime.now().plusHours(730).toInstant(ZoneOffset.of("-03:00")))
                 .sign(Algorithm.HMAC256("secret"));
         }
